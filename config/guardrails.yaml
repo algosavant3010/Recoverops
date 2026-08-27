@@ -1,0 +1,64 @@
+# RecoverOps guardrails — the deterministic policy configuration.
+# Every rupee-touching action is validated against this file. Keep it small,
+# reviewable, and versioned. Changes here are policy changes.
+version: 1
+
+# Global seed for reproducible batches and simulations.
+seed: 42
+
+# Hard caps per record. The policy engine rejects any action that would exceed
+# these — regardless of what the LLM proposes.
+caps:
+  max_retries_per_record: 3
+  max_nudges_per_record: 2
+  max_total_actions_per_record: 5
+  max_discount_pct: 5
+  max_actions_per_batch: 10000
+
+# Minimum wait between two same-kind actions on the same record.
+cooldowns:
+  retry_hours: 24
+  nudge_hours: 48
+  outreach_hours: 24
+
+# When to stop chasing a record.
+stopping_rules:
+  stop_on_success: true
+  stop_on_fraud_flag: true
+  stop_on_customer_optout: true
+  max_wallclock_days: 21
+
+# Compliance guardrails for customer-facing outreach.
+outreach:
+  supported_languages: ["en", "hi", "hinglish"]
+  quiet_hours_local:
+    start_hour: 21   # 9 PM
+    end_hour: 9      # 9 AM
+  max_messages_per_day: 1
+
+# Idempotency-key TTL — same key within TTL = duplicate call, must be rejected.
+idempotency:
+  key_ttl_hours: 168   # 7 days
+
+# Intervention policy: how each root cause maps to allowed actions.
+# The LLM cannot invent new actions; it can only pick from this list.
+interventions:
+  insufficient_funds:
+    actions: ["smart_retry", "nudge"]
+    retry_strategy: "salary_cycle"   # retries scheduled around 1st/7th
+  gateway_downtime:
+    actions: ["smart_retry", "switch_method"]
+    retry_strategy: "exponential_backoff"
+  expired_card:
+    actions: ["nudge_update_method", "switch_method"]
+  mandate_lapsed:
+    actions: ["reauth_mandate", "nudge"]
+  checkout_abandoned:
+    actions: ["recovery_link", "nudge", "small_incentive"]
+    incentive_max_pct: 5
+  b2b_overdue:
+    actions: ["hinglish_promise_to_pay", "nudge"]
+  fraud_suspected:
+    actions: ["skip", "escalate"]
+  unknown:
+    actions: ["escalate"]
