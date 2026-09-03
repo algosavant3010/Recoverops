@@ -1,4 +1,4 @@
-# Byte-compiled / cache
+# Python
 __pycache__/
 *.py[cod]
 *$py.class
@@ -7,16 +7,18 @@ __pycache__/
 .coverage
 htmlcov/
 .mypy_cache/
-
-# Virtual envs
 .venv/
 venv/
 env/
-
-# Build
 build/
 dist/
 *.egg-info/
+
+# Next.js / Vercel
+node_modules/
+.next/
+.vercel/
+*.tsbuildinfo
 
 # Editors / OS
 .vscode/
@@ -27,13 +29,17 @@ Thumbs.db
 # Secrets
 .env
 .env.local
+.env.*.local
 *.pem
 *.key
 
-# Generated artifacts (batches, logs, reports)
+# Generated artifacts
 data/generated/
 data/dev/
 data/holdout/
 artifacts/
 logs/
 *.log
+
+.vercel
+.env*
