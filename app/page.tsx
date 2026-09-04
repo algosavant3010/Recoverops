@@ -5,6 +5,7 @@ import { ArrowRight, BadgeCheck, Ban, Braces, Check, ChevronRight, CircleDollarS
 import { formatInr, runScenario } from "@/lib/recoverops/engine";
 import { scenarios } from "@/lib/recoverops/scenarios";
 import type { AuditEvent } from "@/lib/recoverops/types";
+import { MobileNavigation } from "@/components/mobile-navigation";
 
 const metrics = [
   { label: "Simulated recovery", value: "₹3.76L", delta: "+28.15 pp", icon: CircleDollarSign },
@@ -43,6 +44,8 @@ export default function Home() {
           <a href="#lab">Live lab</a><a href="/safety">Safety</a><a href="/evaluation">Evaluation</a><a href="/audit">Audit</a><a href="/ai-lab">AI lab</a>
         </nav>
         <a className="nav-cta" href="#lab"><span className="live-dot" /> Live demo</a>
+        <MobileNavigation active="lab" />
+
       </header>
 
       <section className="hero shell" id="top">
