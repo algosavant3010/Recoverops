@@ -13,6 +13,7 @@
     "check": "tsc --noEmit && vitest run && eslint . && next build"
   },
   "dependencies": {
+    "@neondatabase/serverless": "^1.1.0",
     "lucide-react": "^0.542.0",
     "next": "^15.5.2",
     "react": "^19.1.1",

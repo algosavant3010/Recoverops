@@ -70,9 +70,9 @@ function gate(record: RecoveryRecord, diagnosis: Diagnosis, action: ActionKind, 
   return { allowed: true, rule: "all_guardrails_passed", reason: "All deterministic policy checks passed." };
 }
 
-export function runScenario(record: RecoveryRecord, options?: { forcedDiagnosis?: RootCause; duplicate?: boolean; now?: Date }): RunResult {
+export function runScenario(record: RecoveryRecord, options?: { forcedDiagnosis?: RootCause; diagnosis?: Diagnosis; duplicate?: boolean; now?: Date }): RunResult {
   const now = options?.now ?? new Date("2026-08-28T10:30:00.000Z");
-  const diagnosis = diagnose(record, options?.forcedDiagnosis);
+  const diagnosis = options?.diagnosis ?? diagnose(record, options?.forcedDiagnosis);
   const state: PolicyState = { totalActions: 0, retries: record.attempts, nudges: 0, messagesToday: 0, batchActions: 0, recoveredPaise: 0, lastActionAt: {} };
   const action = nextAction(diagnosis.cause, state);
   const decision = gate(record, diagnosis, action, state, now);

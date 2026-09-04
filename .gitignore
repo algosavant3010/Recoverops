@@ -43,3 +43,7 @@ logs/
 
 .vercel
 .env*
+
+# Local agent integration metadata
+.agents/
+skills-lock.json
