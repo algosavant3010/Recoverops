@@ -41,7 +41,7 @@ export default function Home() {
           <span>recover<span>ops</span></span>
         </a>
         <nav aria-label="Primary navigation">
-          <a href="#lab">Live lab</a><a href="/safety">Safety</a><a href="/evaluation">Evaluation</a><a href="/audit">Audit</a><a href="/ai-lab">AI lab</a>
+          <a href="#lab">Live lab</a><a href="/operations">Operations</a><a href="/safety">Safety</a><a href="/evaluation">Evaluation</a><a href="/audit">Audit</a><a href="/ai-lab">AI lab</a>
         </nav>
         <a className="nav-cta" href="#lab"><span className="live-dot" /> Live demo</a>
         <MobileNavigation active="lab" />

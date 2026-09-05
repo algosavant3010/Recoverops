@@ -1,4 +1,4 @@
-import { ArrowUpRight, BarChart3, FlaskConical, Menu, Radar, ScrollText, ShieldCheck, Sparkles } from "lucide-react";
+import { ArrowUpRight, BarChart3, FlaskConical, Menu, Radar, RadioTower, ScrollText, ShieldCheck, Sparkles } from "lucide-react";
 import Link from "next/link";
 import styles from "./mobile-navigation.module.css";
 
@@ -8,6 +8,7 @@ const destinations = [
   { key: "evaluation", href: "/evaluation", label: "Evaluation", detail: "Inspect evidence and benchmarks", icon: BarChart3 },
   { key: "audit", href: "/audit", label: "Audit explorer", detail: "Trace every agent decision", icon: ScrollText },
   { key: "ai", href: "/ai-lab", label: "AI lab", detail: "Compare rules with Gemini", icon: Sparkles },
+  { key: "operations", href: "/operations", label: "Operations", detail: "Inspect live test-mode evidence", icon: RadioTower },
 ] as const;
 
 type Destination = (typeof destinations)[number]["key"];

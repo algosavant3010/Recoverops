@@ -23,6 +23,7 @@ Verify these routes on the preview URL:
 - `/safety`
 - `/audit`
 - `/ai-lab`
+- `/operations`
 - `/api/health`
 
 ## Optional Gemini
@@ -35,6 +36,12 @@ GEMINI_MODEL=gemini-3.5-flash-lite
 ```
 
 Never prefix the key with `NEXT_PUBLIC_`.
+
+## Razorpay + protected evidence
+
+Configure `DATABASE_URL`, the three `RAZORPAY_*` test-mode secrets, and `OPERATIONS_DASHBOARD_TOKEN`. In Razorpay Test Mode, register `https://<deployment>/api/webhooks/razorpay` for `payment.failed` and `payment_link.paid`. Keep the dashboard token private and enter it only on `/operations`; it is never persisted by the browser.
+
+Before promotion, verify `/api/razorpay/health`, send one signed test webhook, resend the same event ID to prove deduplication, and confirm that `/operations` shows one case and one duplicate delivery.
 
 ## Production promotion
 
